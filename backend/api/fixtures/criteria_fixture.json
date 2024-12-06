@@ -1,0 +1,152 @@
+[
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 1,
+    "fields": {
+      "name": "Innovation",
+      "description": "Evaluates the level of innovation incorporated into the project, product, or process.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 2,
+    "fields": {
+      "name": "Market potential",
+      "description": "Assesses the attractiveness and potential of the target market for the project or product.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 3,
+    "fields": {
+      "name": "Team expertise",
+      "description": "Examines the skills, knowledge, and experience of the team executing the project.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 4,
+    "fields": {
+      "name": "Execution plan",
+      "description": "Analyzes the detailed plan and strategy for implementing and accomplishing project goals.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 5,
+    "fields": {
+      "name": "Financial viability",
+      "description": "Gauges the financial feasibility and sustainability of the project.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 6,
+    "fields": {
+      "name": "Technology readiness",
+      "description": "Assesses the readiness and maturity of the technology being employed.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 7,
+    "fields": {
+      "name": "Market fit",
+      "description": "Examines how well the product or service aligns with the needs and demands of the target market.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 8,
+    "fields": {
+      "name": "Customer acquisition strategy",
+      "description": "Evaluates the planned approach for acquiring and retaining customers.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 9,
+    "fields": {
+      "name": "Scalability",
+      "description": "Assesses the potential for the project or product to grow and handle increased demand.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 10,
+    "fields": {
+      "name": "Competitive landscape",
+      "description": "Analyzes the competitive environment and positioning within the industry.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 11,
+    "fields": {
+      "name": "Regulatory compliance",
+      "description": "Ensures adherence to legal and regulatory requirements.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 12,
+    "fields": {
+      "name": "Customer feedback",
+      "description": "Gathers insights from customer interactions and feedback to inform improvements.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 13,
+    "fields": {
+      "name": "Strategic partnerships",
+      "description": "Examines collaborations and alliances that contribute to the project's success.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 14,
+    "fields": {
+      "name": "Risks and mitigations",
+      "description": "Identifies potential risks and outlines strategies to mitigate them.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  },
+  {
+    "model": "wildforge_api.criteria",
+    "pk": 15,
+    "fields": {
+      "name": "Sustainability practices",
+      "description": "Assesses the project's commitment to environmentally and socially sustainable practices.",
+      "created_at": "2024-02-05T00:00:00Z",
+      "updated_at": "2024-02-05T00:00:00Z"
+    }
+  }
+]

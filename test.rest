@@ -1,0 +1,490 @@
+### Create Teacher
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+    "first_name": "Teacher",
+    "last_name": "A",
+    "email": "t@mail.com",
+    "password": "Test1234",
+    "role": 1
+}
+
+### Create Student A
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+    "first_name": "Student",
+    "last_name": "A",
+    "email": "a@mail.com",
+    "password": "Test1234",
+    "role": 2
+}
+
+### Create Student B
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+    "first_name": "Student",
+    "last_name": "B",
+    "email": "b@mail.com",
+    "password": "Test1234",
+    "role": 2
+}
+
+### Create Student C
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+    "first_name": "Student",
+    "last_name": "C",
+    "email": "c@mail.com",
+    "password": "Test1234",
+    "role": 2
+}
+
+### Create Student D
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+    "first_name": "Student",
+    "last_name": "D",
+    "email": "d@mail.com",
+    "password": "Test1234",
+    "role": 2
+}
+
+### Create Student E
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+    "first_name": "Student",
+    "last_name": "E",
+    "email": "e@mail.com",
+    "password": "Test1234",
+    "role": 2
+}
+
+### Login as Teacher
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "t@mail.com",
+    "password": "Test1234"
+}
+
+### Create a classroom A From Teacher
+POST http://127.0.0.1:8000/classes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1ODEwLCJpYXQiOjE3MDUzODU1MTAsImp0aSI6IjdjOGU3NTgxYjU0MDQwMDU5YTdlMWU1OTRlMGVhMzI4IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.9GUEALwpUnexMUQxp1LOpX-ZTZhLDss55wb3SQuRfw0
+
+{
+  "course_name": "Classroom A",
+  "sections": "honesty",
+  "schedule": "1:30PM - 2:30PM",
+  "max_teams_members": 5
+}
+
+### Get all classrooms by Teacher from access token
+GET http://127.0.0.1:8000/classes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1ODEwLCJpYXQiOjE3MDUzODU1MTAsImp0aSI6IjdjOGU3NTgxYjU0MDQwMDU5YTdlMWU1OTRlMGVhMzI4IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.9GUEALwpUnexMUQxp1LOpX-ZTZhLDss55wb3SQuRfw0
+
+
+### Login as Student A
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "a@mail.com",
+    "password": "Test1234"
+}
+
+### Student A join classroom A
+POST http://127.0.0.1:8000/classes/join
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1ODQzLCJpYXQiOjE3MDUzODU1NDMsImp0aSI6ImJhNzE4ZGVmYmE5YTQ4NmU4ZWNiODJiMmY2NDNmMTU5IiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.HFYeGNSE68v_LqzQGRwHVk1bnhH6HcmRsYwtI7_Dh5U
+
+{
+    "class_code": "6BE0DB94"
+}
+
+### Login as Student B
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "b@mail.com",
+    "password": "Test1234"
+}
+
+### Student A join classroom B
+POST http://127.0.0.1:8000/classes/join
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1ODgzLCJpYXQiOjE3MDUzODU1ODMsImp0aSI6ImQwMmY1Mjk4ODg1NzRjNzc5YzhjNjU3MzMyYmI4Y2RmIiwidXNlcl9pZCI6MywiZW1haWwiOiJiQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJCIiwicm9sZSI6Mn0.F8enQwi8FADhu2N5P5j5K-bBUkYPL3DncPlLanHh2hk
+
+{
+    "class_code": "6BE0DB94"
+}
+
+### Login as Student C
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "c@mail.com",
+    "password": "Test1234"
+}
+
+### Student A join classroom C
+POST http://127.0.0.1:8000/classes/join
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1OTExLCJpYXQiOjE3MDUzODU2MTEsImp0aSI6ImU5MWM4ZjMwZjczZjQ4NmZhOGQzN2NjMGRmNDUzOGMyIiwidXNlcl9pZCI6NCwiZW1haWwiOiJjQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJDIiwicm9sZSI6Mn0.1L-0h-Ro5PvqQxtJoOpGBPCuBwamfpvgNxc2zuJ5Qtk
+
+{
+    "class_code": "6BE0DB94"
+}
+
+### Login as Student D
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "d@mail.com",
+    "password": "Test1234"
+}
+
+### Student A join classroom D
+POST http://127.0.0.1:8000/classes/join
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1OTM0LCJpYXQiOjE3MDUzODU2MzQsImp0aSI6IjI1ZTcwYzJkMDIwNzQxMjA5YTg2MTk5MGY4MzdmNzlmIiwidXNlcl9pZCI6NiwiZW1haWwiOiJkQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJEIiwicm9sZSI6Mn0.u9Sa4nuOUolOJ--YQ-gP0Ib6W3uWEZc-frtcqagXlN0
+
+{
+    "class_code": "6BE0DB94"
+}
+
+### Login as Student E
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "e@mail.com",
+    "password": "Test1234"
+}
+
+### Student A join classroom E
+POST http://127.0.0.1:8000/classes/join
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg1OTc4LCJpYXQiOjE3MDUzODU2NzgsImp0aSI6ImQzODI0M2JlYTliOTQwMTJiNjVjZTUxOTdjZWQ2MThmIiwidXNlcl9pZCI6NSwiZW1haWwiOiJlQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJEIiwicm9sZSI6Mn0.qtSADGfiEszq9vnVW7LwFlDo4phEwBKmOT5qs_a84fo
+
+{
+    "class_code": "6BE0DB94"
+}
+
+
+### Login as Teacher
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "t@mail.com",
+    "password": "Test1234"
+}
+
+### Get all classrooms by Teacher from access token
+GET http://127.0.0.1:8000/classes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2MTczLCJpYXQiOjE3MDUzODU4NzMsImp0aSI6IjE5Y2Q0MzhkNWMxZDQ5NGI5OGE2ODA5OTI0N2VjNjM0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.hJnCLk2vgyvM7ronu8Jy3uq9edaEAY1dXP5ClNyH17Y
+
+### Accept Student A
+PUT http://127.0.0.1:8000/classes/1/members/2/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2MTczLCJpYXQiOjE3MDUzODU4NzMsImp0aSI6IjE5Y2Q0MzhkNWMxZDQ5NGI5OGE2ODA5OTI0N2VjNjM0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.hJnCLk2vgyvM7ronu8Jy3uq9edaEAY1dXP5ClNyH17Y
+
+### Accept Student B
+PUT http://127.0.0.1:8000/classes/1/members/3/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2MTczLCJpYXQiOjE3MDUzODU4NzMsImp0aSI6IjE5Y2Q0MzhkNWMxZDQ5NGI5OGE2ODA5OTI0N2VjNjM0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.hJnCLk2vgyvM7ronu8Jy3uq9edaEAY1dXP5ClNyH17Y
+
+### Accept Student C
+PUT http://127.0.0.1:8000/classes/1/members/4/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2MTczLCJpYXQiOjE3MDUzODU4NzMsImp0aSI6IjE5Y2Q0MzhkNWMxZDQ5NGI5OGE2ODA5OTI0N2VjNjM0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.hJnCLk2vgyvM7ronu8Jy3uq9edaEAY1dXP5ClNyH17Y
+
+### Accept Student D
+PUT http://127.0.0.1:8000/classes/1/members/5/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2MTczLCJpYXQiOjE3MDUzODU4NzMsImp0aSI6IjE5Y2Q0MzhkNWMxZDQ5NGI5OGE2ODA5OTI0N2VjNjM0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.hJnCLk2vgyvM7ronu8Jy3uq9edaEAY1dXP5ClNyH17Y
+
+### Accept Student E
+PUT http://127.0.0.1:8000/classes/1/members/6/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2MTczLCJpYXQiOjE3MDUzODU4NzMsImp0aSI6IjE5Y2Q0MzhkNWMxZDQ5NGI5OGE2ODA5OTI0N2VjNjM0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.hJnCLk2vgyvM7ronu8Jy3uq9edaEAY1dXP5ClNyH17Y
+
+
+### Set leader Student A
+PUT http://127.0.0.1:8000/classes/1/members/2/setleader
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2ODU3LCJpYXQiOjE3MDUzODY1NTcsImp0aSI6IjgzNDQ1ZWQzNzZhMzQ1Y2NiNDBjNzUzMmQ1ZWNjZGU2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0QG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlRlYWNoZXIiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6MX0.KlqEl5hwKhbTci03AHrOc5t4H3PDrFxBS7ZsxwaHymk
+
+
+### Login as Student A
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "a@mail.com",
+    "password": "Test1234"
+}
+
+### Accept as leader Student A
+PUT http://127.0.0.1:8000/classes/1/members/2/acceptasleader
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2ODc1LCJpYXQiOjE3MDUzODY1NzUsImp0aSI6IjlhZjgwYmFjZWI1NjQwM2RiYzFlYTIxY2FkMTExZjVkIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.28KWt6z6UJlFIKM5icHlbDm_37J_Te-zbEzkW3d9t40
+
+### Create Team A by Student A
+POST http://127.0.0.1:8000/classes/1/teams
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg2ODc1LCJpYXQiOjE3MDUzODY1NzUsImp0aSI6IjlhZjgwYmFjZWI1NjQwM2RiYzFlYTIxY2FkMTExZjVkIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.28KWt6z6UJlFIKM5icHlbDm_37J_Te-zbEzkW3d9t40
+
+{
+  "name": "Team A",
+  "description": "Just a team if you want to join just join.",
+  "status": 1
+}
+
+### Login as Student B
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "b@mail.com",
+    "password": "Test1234"
+}
+
+### Joint Team A by Student B
+POST http://127.0.0.1:8000/classes/1/teams/1/join
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3MzM3LCJpYXQiOjE3MDUzODcwMzcsImp0aSI6ImRlMDdjOTg2MTY4ZDQ5ZWFhZDcwMmZiOGRjN2VlODA3IiwidXNlcl9pZCI6MywiZW1haWwiOiJiQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJCIiwicm9sZSI6Mn0.KOuGitRI6kdAxoQEzPDf93wFcUZdz5QjLiZwMh86Y1A
+
+### Login as Student C
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "c@mail.com",
+    "password": "Test1234"
+}
+
+### Joint Team A by Student C
+POST http://127.0.0.1:8000/classes/1/teams/1/join
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3MzgwLCJpYXQiOjE3MDUzODcwODAsImp0aSI6IjFhNWMyM2U4ZjA3NTQ3MzBhZDdhMThjYjA4ODYxNGU3IiwidXNlcl9pZCI6NCwiZW1haWwiOiJjQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJDIiwicm9sZSI6Mn0.U9d1XVd8NvfT_ek97iCHbQ6JQTYcnvY0GCEzh_4HP5c
+
+### Login as Student D
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "d@mail.com",
+    "password": "Test1234"
+}
+
+### Joint Team A by Student D
+POST http://127.0.0.1:8000/classes/1/teams/1/join
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3NDM4LCJpYXQiOjE3MDUzODcxMzgsImp0aSI6IjBlODBiNGM0NGQxNDRjYzdhMDUwMTBkZjQxNzcyZmUwIiwidXNlcl9pZCI6NiwiZW1haWwiOiJkQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJEIiwicm9sZSI6Mn0.kX18i_CicRRv0GUrnRTN5qEBxO-dGSLU9n9fbSunE54
+
+
+### Login as Student E
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "e@mail.com",
+    "password": "Test1234"
+}
+
+### Joint Team A by Student E
+POST http://127.0.0.1:8000/classes/1/teams/1/join
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3NTE4LCJpYXQiOjE3MDUzODcyMTgsImp0aSI6IjFlNTUwYzIxY2I2NjRkODg4NGZlN2IwMzQ5M2M3M2E1IiwidXNlcl9pZCI6NSwiZW1haWwiOiJlQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJEIiwicm9sZSI6Mn0.8QQT_DhGaSGXmuxr6CWDkkZ4nr5hIZYa6n3V4Vy0QP4
+
+
+### Login as Student A
+POST http://127.0.0.1:8000/tokens/acquire
+Content-Type: application/json
+
+{
+    "email": "a@mail.com",
+    "password": "Test1234"
+}
+
+### Accept Student B to Team A by Student A
+PUT http://127.0.0.1:8000/classes/1/teams/1/members/2/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3NjcxLCJpYXQiOjE3MDUzODczNzEsImp0aSI6IjdhNjQ3ZGUxNmI4MjQ1ZTQ5YTNkN2Y4NDNhOWM3MWMwIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.QyqNlxGikYWCum7b20wqhTJ2PJmZYQ5CVIIqJ1lkmGI
+
+### Accept Student C to Team A by Student A
+PUT http://127.0.0.1:8000/classes/1/teams/1/members/3/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3NjcxLCJpYXQiOjE3MDUzODczNzEsImp0aSI6IjdhNjQ3ZGUxNmI4MjQ1ZTQ5YTNkN2Y4NDNhOWM3MWMwIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.QyqNlxGikYWCum7b20wqhTJ2PJmZYQ5CVIIqJ1lkmGI
+
+### Accept Student D to Team A by Student A
+PUT http://127.0.0.1:8000/classes/1/teams/1/members/4/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3NjcxLCJpYXQiOjE3MDUzODczNzEsImp0aSI6IjdhNjQ3ZGUxNmI4MjQ1ZTQ5YTNkN2Y4NDNhOWM3MWMwIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.QyqNlxGikYWCum7b20wqhTJ2PJmZYQ5CVIIqJ1lkmGI
+
+### Accept Student E to Team A by Student A
+PUT http://127.0.0.1:8000/classes/1/teams/1/members/5/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Mzg3NjcxLCJpYXQiOjE3MDUzODczNzEsImp0aSI6IjdhNjQ3ZGUxNmI4MjQ1ZTQ5YTNkN2Y4NDNhOWM3MWMwIiwidXNlcl9pZCI6MiwiZW1haWwiOiJhQG1haWwuY29tIiwiZmlyc3RfbmFtZSI6IlN0dWRlbnQiLCJsYXN0X25hbWUiOiJBIiwicm9sZSI6Mn0.QyqNlxGikYWCum7b20wqhTJ2PJmZYQ5CVIIqJ1lkmGI
+
+
+###### ACTIVITY RELATED REQUESTSSS #############################################################
+
+## ACTIVITY TEMPLATE #######################################################
+# Create Activity Template (Teacher)
+POST http://127.0.0.1:8000/activity-templates
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+    "course_name": "Software Engineering 1",
+    "title": "Work Breakdown Structure",
+    "description": "There could be links for files here and or description about the activity."
+}
+
+# Get Activity Templates by Course (Teacher)
+GET http://127.0.0.1:8000/activity-templates/by-course?course_name=Math%20101
+Authorization: Bearer <Your_Auth_Token>
+
+# Retrieve Activity Template (Teacher)
+GET http://127.0.0.1:8000/activity-templates/1
+Authorization: Bearer <Your_Auth_Token>
+
+# Update Activity Template (Teacher)
+PUT http://127.0.0.1:8000/activity-templates/1
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+    "course_name": "Software Engineering 01",
+    "title": "Software Requirements Specification",
+    "description": "Updated! There could be links for files here and or description about the activity."
+}
+
+# Delete Activity Template (Teacher)
+DELETE http://127.0.0.1:8000/activity-templates/1
+Authorization: Bearer <Your_Auth_Token>
+
+# List all Activity Templates (Teacher)
+GET http://127.0.0.1:8000/activity-templates
+Authorization: Bearer <Your_Auth_Token>
+
+## ACTIVITY ##########################################################################################
+# Create Activity (Teacher)
+POST http://127.0.0.1:8000/activities
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+    "classroom_id": 1,
+    "team_id": [1, 2],
+    "title": "Activity 1",
+    "description": "Description for Activity 1",
+    "due_date": "2024-02-01T12:00:00Z",
+    "total_score": 100
+}
+
+# List Activities for a Class (Teacher and Student)
+GET http://127.0.0.1:8000/classes/1/activities
+Authorization: Bearer <Your_Auth_Token>
+
+# Create Activity from Template (Teacher)
+POST http://127.0.0.1:8000/classes/1/activities/from_template
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+    "template_id": 1,
+    "team_ids": [1, 2],
+    "due_date": "2024-02-01T12:00:00Z",
+    "total_score": 100
+}
+
+# Submit or Unsubmit an Activity (Student)
+POST http://127.0.0.1:8000/classes/1/teams/1/activities/1/submit
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+    "submission_status": true
+}
+
+# Add Evaluation to an Activity (Teacher)
+POST http://127.0.0.1:8000/classes/1/teams/1/activities/1/add-evaluation
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+    "evaluation": 80
+}
+
+# Delete Evaluation for an Activity (Teacher)
+DELETE http://127.0.0.1:8000/classes/1/teams/1/activities/1/delete-evaluation
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+## ACTIVITY WORK ATTACHMENT ###############################################################################
+# Add Work Attachment to an Activity (Student)
+POST http://127.0.0.1:8000/activity-work-attachments
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+  "activity_id": 1,
+  "description": "Work attachment description",
+  "file_attachment": "<please insert actual file path>" 
+}
+
+# Update Work Attachment (Student)
+PUT http://127.0.0.1:8000/activity-work-attachments/1
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+  "activity_id": 1,
+  "description": "Updated work attachment description",
+  "file_attachment": "<please insert actual file path>" 
+}
+
+# Delete Work Attachment (Student)
+DELETE http://127.0.0.1:8000/activity-work-attachments/1
+Authorization: Bearer <Your_Auth_Token>
+
+# Get all Work Attachments for a specific Activity (Student)
+GET http://127.0.0.1:8000/activity-work-attachments/activities/1
+Authorization: Bearer <Your_Auth_Token>
+
+## ACTIVITY WORK ATTACHMENT ###############################################################################
+# Create Activity Comment (Teacher)
+POST http://127.0.0.1:8000/activity-comments
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+  "user_id": 1,
+  "activity_id": 1,
+  "comment": "This is a test comment"
+}
+
+# Update Activity Comment (Teacher)
+PUT http://127.0.0.1:8000/activity-comments/1
+Content-Type: application/json
+Authorization: Bearer <Your_Auth_Token>
+
+{
+  "comment": "Updated test comment"
+}
+
+# Delete Activity Comment (Teacher)
+DELETE http://127.0.0.1:8000/activity-comments/1
+Authorization: Bearer <Your_Auth_Token>
+
+# Get All Comments for a Specific Activity (Teacher and Student)
+GET http://127.0.0.1:8000/activity-comments/activities/1
+Authorization: Bearer <Your_Auth_Token>
+
+# List All Activity Comments (Teacher)
+GET http://127.0.0.1:8000/activity-comments
+Authorization: Bearer <Your_Auth_Token>
