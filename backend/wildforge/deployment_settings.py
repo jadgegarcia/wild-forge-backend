@@ -110,3 +110,6 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
