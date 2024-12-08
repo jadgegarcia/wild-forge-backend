@@ -6,9 +6,9 @@ import sys
 def main():
     """Run administrative tasks."""
     settings_module = (
-        'backend.wildforge.deployment_settings'
+        'wildforge.deployment_settings'
         if 'RENDER_EXTERNAL_HOSTNAME' in os.environ
-        else 'backend.wildforge.settings'
+        else 'wildforge.settings'
     )
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
     try:
