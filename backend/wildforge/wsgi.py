@@ -8,10 +8,14 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
 
-settings_module = 'backend.wildforge.deployment_settings' if 'RENDER_EXTERNAL_HOSTNAME' in os.environ else 'backend.wildforge.settings'
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',settings_module )
+settings_module = (
+    'backend.wildforge.deployment_settings'
+    if 'RENDER_EXTERNAL_HOSTNAME' in os.environ
+    else 'backend.wildforge.settings'
+)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
 application = get_wsgi_application()
+
