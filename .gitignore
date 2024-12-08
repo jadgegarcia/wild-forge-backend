@@ -6,7 +6,7 @@
 
 
 /backend/api/**/__pycache__/
-/backend/api/migrations/*
+#/backend/api/migrations/*
 !/backend/api/migrations/__init__.py
 /*.py[cod]
 /*$py.class
