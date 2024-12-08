@@ -18,7 +18,7 @@ from api.models import ActivityComment
 from api.models import ClassMember
 from api.models import User
 from api.models import ActivityCriteriaRelation
-from api.models import ActivityGeminiSettings
+#from api.models import ActivityGeminiSettings
 from api.models import SpringProject
 
 from api.serializers import ActivityWorkAttachmentSerializer
@@ -61,11 +61,11 @@ class ActivityController(viewsets.GenericViewSet,
     #AIzaSyBzwUqIePVR3UJWhkLWkVHQunP7ZRogr0k
     #AIzaSyCN0cmESuQIO_WA6pFeYkGlE0veJVhCW94
     #AIzaSyAP5-SgR3o2jI45MQ8ZD9Y8AhEGn-_yu0A
-    # API_KEY = "AIzaSyBzwUqIePVR3UJWhkLWkVHQunP7ZRogr0k"
+    API_KEY = "AIzaSyBzwUqIePVR3UJWhkLWkVHQunP7ZRogr0k"
     # genai.configure(api_key=API_KEY)
-    API_KEY = ActivityGeminiSettings.objects.first()
-    genai.configure(api_key=API_KEY.api_key)
-    print(API_KEY.api_key)
+    # API_KEY = ActivityGeminiSettings.objects.first()
+    # genai.configure(api_key=API_KEY.api_key)
+    # print(API_KEY.api_key)
     
 
     # for m in genai.list_models():
