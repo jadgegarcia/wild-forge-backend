@@ -6,22 +6,24 @@ python backend/manage.py collectstatic --no-input
 
 python backend/manage.py migrate
 
-
 if [[ $CREATE_SUPERUSER ]]
 then
     python backend/manage.py shell <<EOF
 from django.contrib.auth import get_user_model
-from django.core.management import call_command
 
 User = get_user_model()
 
-# Create the superuser
-User.objects.create_superuser(
-    username='$DJANGO_SUPERUSER_USERNAME',
-    email='$DJANGO_SUPERUSER_EMAIL',
-    password='$DJANGO_SUPERUSER_PASSWORD',
-    first_name='Admin',  # You can also set this via environment variable
-    last_name='User'     # You can also set this via environment variable
-)
+# Check if the superuser already exists to avoid duplication
+if not User.objects.filter(email='$DJANGO_SUPERUSER_EMAIL').exists():
+    User.objects.create_superuser(
+        email='$DJANGO_SUPERUSER_EMAIL',
+        password='$DJANGO_SUPERUSER_PASSWORD',
+        first_name='${DJANGO_SUPERUSER_FIRST_NAME:-Admin}',  # Default value if not set
+        last_name='${DJANGO_SUPERUSER_LAST_NAME:-User}',     # Default value if not set
+        role=0  # Set role to ADMIN
+    )
+    print("Superuser created successfully.")
+else:
+    print("Superuser already exists.")
 EOF
 fi
