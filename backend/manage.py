@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    settings_module = 'wildforge.deployment_settings' if 'RENDER_EXTERNAL_HOSTNAME' in os.environ else 'wildforge.settings'
+    settings_module = 'backend.wildforge.deployment_settings' if 'RENDER_EXTERNAL_HOSTNAME' in os.environ else 'backend.wildforge.settings'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE',settings_module )
     try:
         from django.core.management import execute_from_command_line
