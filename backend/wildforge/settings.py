@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'api',
+    'storages',
 ]
 
 REST_FRAMEWORK = {
@@ -153,6 +154,31 @@ WSGI_APPLICATION = 'wildforge.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+print(os.getenv("AWS_ACCESS_KEY"))
+print(os.getenv("AWS_SECRET_KEY"))
+print(os.getenv("AWS_STORAGE_BUCKET_NAME"))
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv("AWS_ACCESS_KEY"),
+            "secret_key": os.getenv("AWS_SECRET_KEY"),
+            "bucket_name": os.getenv("AWS_BUCKET_NAME"),
+        },
+    },
+    "media": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv("AWS_ACCESS_KEY"),
+            "secret_key": os.getenv("AWS_SECRET_KEY"),
+            "bucket_name": os.getenv("AWS_BUCKET_NAME"),
+        },
+    },
+}
+
+# DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"  # Use S3 for FileField
+
 
 # DATABASES = {
 #     'default': {
@@ -214,8 +240,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'backend','static')]
+STATIC_ROOT =os.path.join(BASE_DIR, '/backend/staticfiles')
+
+
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_BUCKET_NAME')
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# AWS_S3_URL_PROTOCOL = 'https'
+# MEDIA_URL = f'{AWS_S3_URL_PROTOCOL}://{AWS_S3_CUSTOM_DOMAIN}/media/'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

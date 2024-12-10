@@ -29,7 +29,7 @@ from api.serializers import ClassRoomSerializer
 from api.serializers import TeamSerializer
 from api.serializers import CriteriaSerializer
 
-
+import requests
 import traceback
 import pymupdf # type: ignore
 import os
@@ -61,7 +61,7 @@ class ActivityController(viewsets.GenericViewSet,
     #AIzaSyBzwUqIePVR3UJWhkLWkVHQunP7ZRogr0k
     #AIzaSyCN0cmESuQIO_WA6pFeYkGlE0veJVhCW94
     #AIzaSyAP5-SgR3o2jI45MQ8ZD9Y8AhEGn-_yu0A
-    #API_KEY = "AIzaSyBzwUqIePVR3UJWhkLWkVHQunP7ZRogr0k"
+    # API_KEY = "AIzaSyBzwUqIePVR3UJWhkLWkVHQunP7ZRogr0k"
     # genai.configure(api_key=API_KEY)
     API_KEY = ActivityGeminiSettings.objects.first()
     genai.configure(api_key=API_KEY.api_key)
@@ -119,45 +119,48 @@ class ActivityController(viewsets.GenericViewSet,
         
     def pdf_to_images(pdf_path, output_folder, criteria_with_strictness, activity_instance):
         #D:\TECHNO_SYS\wildforge\techno-systems-main\techno-systems\backend\backend\activity_work_submissions
-        doc = pymupdf.open(os.getcwd() + pdf_path)  # Attempt to open the PDF
+        #doc = pymupdf.open(pdf_path)  # Attempt to open the PDF
         # doc = pymupdf.open("C:\\Users\\Noel Alemaña\\finaldeploy\\wild-forge\\backend\\backend\\" + pdf_path)
-
+        r = requests.get(pdf_path)
+        data = r.content
+        doc = pymupdf.Document(stream=data)
+        
         #print(f"There are {doc.page_count} Pages")
         for i in range(doc.page_count):
             page = doc.load_page(i)
             pix = page.get_pixmap()
-            image_path = f"{output_folder}/page_{i + 1}.png"
+            image_path = f"{output_folder}/{doc.name}page_{i + 1}.png"
             pix.save(image_path)
             #print(f"Page {i + 1} converted to image: {image_path}")
         
-        img_list = ActivityController.get_images(doc.page_count, output_folder, criteria_with_strictness, activity_instance)
+        img_list = ActivityController.get_images(doc, output_folder, criteria_with_strictness, activity_instance)
         
         #print("PROMPT TEXT: ", img_list)
         
         response = ActivityController.model.generate_content(img_list)
         print("Response Content:", response.text) 
         
-        ActivityController.delete_files(doc.page_count, output_folder)
+        ActivityController.delete_files(doc.page_count,doc.name, output_folder)
         doc.close()
         
         return response.text
     
     
 
-    def delete_files(pageTotal, output_folder):
+    def delete_files(pageTotal,docName, output_folder):
         for i in range(pageTotal):
             try:
 
-                os.remove(output_folder + f"/page_{i + 1}.png")
+                os.remove(output_folder + f"/{docName}page_{i + 1}.png")
                 #print(f"File at {output_folder}/page_{i + 1}.png deleted successfully.")
             except OSError as e:
                 print(f"Error: {output_folder}/page_{i + 1}.png - {e.strerror}")
 
-    def get_images(numberOfPages, output_folder, criteria_with_strictness, activity_instance):
+    def get_images(doc, output_folder, criteria_with_strictness, activity_instance):
 
         image_list = []
-        for i in range(numberOfPages):
-            image_list.append(f"{output_folder}/page_{i + 1}.png")
+        for i in range(doc.page_count):
+            image_list.append(f"{output_folder}/{doc.name}page_{i + 1}.png")
         
         images = [
             "You are tasked with analyzing and evaluating a submitted activity, represented by multiple images (pages of a PDF file), according to a set of predefined criteria. " +
@@ -556,7 +559,7 @@ class TeamActivitiesController(viewsets.GenericViewSet,
                 for relation in criteria_relations
             ]
 
-            relative_pdf_path = os.getcwd() +os.path.join("/activity_work_submissions")
+            relative_pdf_path = os.getcwd() + os.path.join("/activity_work_submissions")
             #print('submit:' + relative_pdf_path)
 
             for attachment_data in serializer.data:
