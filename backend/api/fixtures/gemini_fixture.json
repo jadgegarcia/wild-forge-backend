@@ -1,0 +1,12 @@
+[
+    {
+      "model": "wildforge_api.activitygeminisettings",
+      "pk": 1,
+      "fields": {
+        "api_key": "AIzaSyD177Z-9JXRbuFqL4CsZm2rBAckVnVc-YI",
+        "created_at": "2024-12-10T00:26:01Z",
+        "updated_at": "2024-12-10T00:26:01Z"
+      }
+    }
+  ]
+  

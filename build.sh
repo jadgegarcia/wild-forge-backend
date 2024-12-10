@@ -6,6 +6,9 @@ python backend/manage.py collectstatic --no-input
 
 python backend/manage.py migrate
 
+python backend/manage.py loaddata backend/api/fixtures/gemini_fixture.json
+
+
 if [[ $CREATE_SUPERUSER ]]
 then
     python backend/manage.py shell <<EOF
