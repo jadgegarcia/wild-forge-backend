@@ -11,6 +11,8 @@
 /*.py[cod]
 /*$py.class
 
+/nondocker.env
+
 # C extensions
 /*.so
 
