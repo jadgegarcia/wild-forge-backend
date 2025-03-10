@@ -80,11 +80,25 @@ ROOT_URLCONF = 'wildforge.urls'
 
 
 STORAGES = {
-    "default":{
-        "BACKEND" : "django.core.files.storage.FileSystemStorage",
+     "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv("AWS_ACCESS_KEY"),
+            "secret_key": os.getenv("AWS_SECRET_KEY"),
+            "bucket_name": os.getenv("AWS_BUCKET_NAME"),
+        },
+    },
+    "media": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv("AWS_ACCESS_KEY"),
+            "secret_key": os.getenv("AWS_SECRET_KEY"),
+            "bucket_name": os.getenv("AWS_BUCKET_NAME"),
+        },
     },
     "staticfiles": {
         "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage",
+        
     },
 
 }

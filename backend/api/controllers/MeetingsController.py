@@ -10,10 +10,13 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
 from openai import OpenAI
 from django.db.models import Sum, F
+from django.core.serializers import serialize
+from django.utils.timezone import now
+import json
 
 from api.custom_permissions import IsTeacher
 
-from api.models import Meeting, ClassMember, Remark, Rating, Feedback, MeetingComment, MeetingPresentor, User
+from api.models import Meeting, ClassMember, Remark, Rating, Feedback, MeetingComment, MeetingPresentor, User, SpringProjectBoard, SpringBoardTemplate, MeetingCriteria,SpringProject,Criteria
 
 from api.serializers import MeetingSerializer, MeetingCommentSerializer, MeetingCriteriaSerializer, MeetingPresentorSerializer, RatingSerializer, RemarkSerializer, FeedbackSerializer, NoneSerializer
 
@@ -547,7 +550,60 @@ class MeetingsController(viewsets.GenericViewSet,
         meeting.status = "completed"
         meeting.video = None
         meeting.save()
+        print("Complete Meeting: ")
+        template_instance = SpringBoardTemplate.objects.filter(title = "Pitch").first()
+        if not template_instance:
+            template_instance = SpringBoardTemplate.objects.create(
+                title="Pitch",
+                content="",
+                rules = "",
+                description = "Project board for the result of the Pitching and Validation",
+                date_created = now()
+            )
 
+        meetingPresentors = MeetingPresentor.objects.filter(meeting_id = meeting.id)
+        for meetingPresentor in meetingPresentors:
+            meeting = meetingPresentor.meeting_id
+            pitch = meetingPresentor.pitch_id
+            team = meetingPresentor.team_id
+
+            ratings = Rating.objects.filter(meeting_id = meeting.id, pitch_id = pitch.id)
+            ratings_json = serialize('json', ratings)
+            parsed_json = json.loads(ratings_json)
+            print(f"Parsed JSON: {parsed_json}")
+            result_json = {}
+            for item in parsed_json:
+                try:
+                    # Fetch activity_criteria ID and use it to get the name
+                    meeting_criteria_id = item["fields"]["meeting_criteria_id"]
+                    meeting_criteria = MeetingCriteria.objects.get(pk=meeting_criteria_id)
+                    meeting_criteria_name = Criteria.objects.filter(pk = meeting_criteria.criteria_id.id).first()
+                    print(f"meeting_criteria_name: {meeting_criteria_name.name}")
+                    # Store the feedback data in the required format
+                    result_json[meeting_criteria_name.name] = {
+                        "score": float(item["fields"]["rating"]) * 2,
+                        "description": meeting_criteria_name.description
+                    }
+                except Exception as e:
+                    print(f"Error processing item {item}: {e}")
+            result_json_string = json.dumps(result_json, indent=4)
+            criteria_feedback = result_json_string
+            print(criteria_feedback)
+            spring_project = SpringProject.objects.filter(team_id=team.id, is_active=True).first()
+            average_score = sum(float(item["fields"]["rating"]) for item in parsed_json) / len(parsed_json)
+            score = average_score * 2
+            SpringProjectBoard.objects.create(
+                title= template_instance.title,
+                template_id=template_instance.id,
+                feedback="",
+                recommendation="",
+                references="",
+                project_id=spring_project,
+                criteria_feedback=criteria_feedback,
+                score=score,
+            )
+            spring_project.score = spring_project.score + score
+            spring_project.save()
         return Response(MeetingSerializer(meeting).data, status=status.HTTP_200_OK)
 
     swagger_auto_schema(
